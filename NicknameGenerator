@@ -1,0 +1,64 @@
+import customtkinter
+import tkinter
+import random
+
+customtkinter.set_appearance_mode("dark")  # Modes: system (default), light, dark
+customtkinter.set_default_color_theme("green")
+
+chars = 'qwertyuiopasdfghjklzxcvbnm'
+numbers = '1234567890'
+symbols = '#&%@^*$![]'
+
+chars = list(chars + numbers + chars.upper())
+
+
+def generate():
+    len_passwords = int(entry_len.get())
+    count_passwords = int(entry_count.get())
+    for i in range(count_passwords):
+        password = '-  '
+        for j in range(len_passwords):
+            password += random.choice(chars)
+        text_field.insert(tkinter.END, password + '\n')
+
+
+def clear():
+    text_field.delete(0.0, tkinter.END)
+
+
+def addsymb():
+    chars.extend(symbols)
+
+
+window = customtkinter.CTk()
+window.title('Nickname generator')
+window.geometry('600x400')
+
+window.resizable(False, False)
+window.iconbitmap('logo.ico')
+window.eval('tk::PlaceWindow . center')
+
+customtkinter.CTkLabel(window, text='Passwords: ').place(x=160, y=30)
+entry_count = customtkinter.CTkEntry(window, width=50)
+entry_count.place(x=100, y=30)
+
+customtkinter.CTkLabel(window, text='Password length: ').place(x=160, y=60)
+entry_len = customtkinter.CTkEntry(window, width=50)
+entry_len.place(x=100, y=60)
+
+btn_clear = customtkinter.CTkButton(window, text='Очистить', command=clear)
+btn_clear.place(x=350, y=100)
+
+btn_generate = customtkinter.CTkButton(window, text='Генерировать', command=generate)
+btn_generate.place(x=150, y=100)
+
+text_field = customtkinter.CTkTextbox(window, width=560, height=230)
+text_field.place(x=20, y=150)
+
+checkbox = customtkinter.CTkCheckBox(window, text='Использовать символы', width=50, height=50, command=addsymb)
+checkbox.place(x=280, y=30)
+
+label = customtkinter.CTkLabel(window, text='by envise', width=100, height=20)
+label.place(x=520, y=380)
+
+window.mainloop()
