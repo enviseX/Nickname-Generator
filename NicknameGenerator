@@ -35,7 +35,6 @@ window.title('Nickname generator')
 window.geometry('600x400')
 
 window.resizable(False, False)
-window.iconbitmap('logo.ico')
 window.eval('tk::PlaceWindow . center')
 
 customtkinter.CTkLabel(window, text='Passwords: ').place(x=160, y=30)
